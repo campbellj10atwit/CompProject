@@ -263,6 +263,7 @@ public class genpuz {
         //7 has 6 pieces less than after it, 3 has 2, 4 has 2, 5 has 2, 2 has 1, 1 has none, 8 has 1, and 6 has none
         //the total is 14, and because the count is even, it means the puzzle is solvable
         //the loop goes over each piece, ignoring zero in all cases
+        //source that helped write alg: https://math.stackexchange.com/questions/293527/how-to-check-if-a-8-puzzle-is-solvable
         int inv_count = 0;
         for (int i =0; i< 9; i++) {
             if (locs[i]!=0) {
