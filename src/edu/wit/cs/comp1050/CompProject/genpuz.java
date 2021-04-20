@@ -24,6 +24,7 @@ public class genpuz {
     
     
     public Button[][] genpuz() {
+        //setup buttons 1-8 and a blank
         Button one = new Button("  1  ");
         one.setStyle("-fx-font-size: 3em; ");
         one.setPadding(new Insets(10));
@@ -58,14 +59,8 @@ public class genpuz {
             loc[i] = i;
         }
         Collections.shuffle(Arrays.asList(loc));
-        
+        //shuffles and order 0-8 that randomizes the array start
         locs = loc;
-        int chk [][] = new int [3][3];
-        for (int i = 0; i<3; i++) {
-            for (int j = 0, k = 0; j<3; j++,k++) {
-                chk[i][j] = loc[k];
-            }
-        }
         int k = 0;
         for (int i = 0; i<3; i++) {
             for (int j = 0; j<3; j++) {
@@ -108,7 +103,7 @@ public class genpuz {
             }
         }
         
-            
+        //setting up movement for each button    
         one.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
                 int a = GridPane.getRowIndex(one);
@@ -256,11 +251,13 @@ public class genpuz {
         })
         ;
         
-        
+        //returning the final array
         return arr;
     }
+    //this function does not work 100% of the time, but drastically increased the consistency of the randomly generated puzzles
     static int getInvCount()
     {
+        //setting up array to check
         int arr[][] = new int [3][3];
         for (int i =0; i<3; i++) {
             for (int j = 0,k=0; j<3; j++,k++) {
