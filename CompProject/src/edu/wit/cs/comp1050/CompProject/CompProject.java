@@ -26,7 +26,8 @@ public class CompProject extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        // TODO Auto-generated method stub
+        //Started Commenting
+        //Comment everything
         
         genpuz puz = new genpuz();
         boolean win = false;
