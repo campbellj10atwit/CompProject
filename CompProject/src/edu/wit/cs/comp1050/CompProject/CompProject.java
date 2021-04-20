@@ -28,7 +28,7 @@ public class CompProject extends Application{
     public void start(Stage stage) throws Exception {
         //Started Commenting
         //Comment everything
-        
+        //
         genpuz puz = new genpuz();
         boolean win = false;
         arr = puz.genpuz();
