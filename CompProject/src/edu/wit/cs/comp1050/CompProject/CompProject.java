@@ -15,7 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class CompProject extends Application{
-    int moves = 0;
+    
     static Button arr[][] = new Button[3][3];
     
 
@@ -26,29 +26,25 @@ public class CompProject extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        //Started Commenting
-        //Comment everything
-        //
+        
+        //declare puzzle class and win boolean, retrieve the array
         genpuz puz = new genpuz();
         boolean win = false;
         arr = puz.genpuz();
         int k = 1;
         Button blank = new Button();
-        
-        
+        //declares the blank button so it can be found later
+        //other jfx declarations for the game scene
         Button rand = new Button("Randomize");
         rand.setStyle("-fx-font-size: 2em; ");
         BorderPane pane = new BorderPane();
         HBox bot = new HBox(rand);
         GridPane grid = new GridPane();
-        
+        //initializes new arrays until the puzzle is solvable
         while (!puz.isSolvable()) {
-            arr = puz.genpuz();
-            
-            
+            arr = puz.genpuz(); 
         }
-        
-        
+        //initialize new arrays on the randomize button keypress
         rand.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
                 arr = puz.genpuz();
@@ -57,6 +53,7 @@ public class CompProject extends Application{
                     
                     
                 }
+                //clears the gridpane everytime it gets a new valid array
                 grid.getChildren().clear();
                 for (int i = 0; i<3; i++) {
                     for (int j = 0; j<3; j++) {
@@ -74,25 +71,22 @@ public class CompProject extends Application{
                 grid.add(arr[i][j], j, i);
             }
         }
-        Label move = new Label();
         
         
+        //gridpane declarations
         grid.setVgap(10);
         grid.setHgap(10);
         pane.setCenter(grid);
         grid.setAlignment(Pos.CENTER);
         bot.setAlignment(Pos.BOTTOM_CENTER);
-        
         bot.setSpacing(15);
-        move.setAlignment(Pos.TOP_CENTER);
-        pane.setTop(move);
         pane.setCenter(grid);
         pane.setBottom(bot);
         Scene scene = new Scene (pane, 270,300);
         stage.setTitle("Puzzle");
         stage.setScene(scene);
         stage.show();
-        
+        //check if the game is one on every mouse click
         scene.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -125,6 +119,7 @@ public class CompProject extends Application{
         
         
     }
+    //method to retrieve a node at a specific point in the gridpane, used for win alg
     private Node getNodeFromGridPane(GridPane gridPane, int col, int row) {
         for (Node node : gridPane.getChildren()) {
             if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {

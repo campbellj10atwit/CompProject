@@ -24,6 +24,7 @@ public class genpuz {
     
     
     public Button[][] genpuz() {
+        //intialize buttons to go in the array
         Button one = new Button("  1  ");
         one.setStyle("-fx-font-size: 3em; ");
         one.setPadding(new Insets(10));
@@ -58,14 +59,9 @@ public class genpuz {
             loc[i] = i;
         }
         Collections.shuffle(Arrays.asList(loc));
-        
+        //a one dimensional array to get the order of the buttons
         locs = loc;
-        int chk [][] = new int [3][3];
-        for (int i = 0; i<3; i++) {
-            for (int j = 0, k = 0; j<3; j++,k++) {
-                chk[i][j] = loc[k];
-            }
-        }
+        //a loop to map each button to the array in its desired position
         int k = 0;
         for (int i = 0; i<3; i++) {
             for (int j = 0; j<3; j++) {
@@ -108,7 +104,7 @@ public class genpuz {
             }
         }
         
-            
+        //lines for movement, definitely could have been a method, but this was the fastest way to implement this     
         one.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent event) {
                 int a = GridPane.getRowIndex(one);
@@ -256,11 +252,12 @@ public class genpuz {
         })
         ;
         
-        
+        //returns the final array
         return arr;
     }
     static int getInvCount()
     {
+        //algorithm to get the count of inverses for the is solvable method, using the locs one dimensional array as an intializer
         int arr[][] = new int [3][3];
         for (int i =0; i<3; i++) {
             for (int j = 0,k=0; j<3; j++,k++) {
@@ -276,11 +273,13 @@ public class genpuz {
                 if (arr[j][i] > 0 &&
                                 arr[j][i] > arr[i][j])
                     inv_count++;
+        //returns the count
         return inv_count;
     }
      
     // This function returns true
     // if given 8 puzzle is solvable.
+    // The algorithm i found greatly increased the solvable puzzle rate, but it is not 100 percent effective
     boolean isSolvable()
     {
         // Count inversions in given 8 puzzle
