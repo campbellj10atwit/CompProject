@@ -258,33 +258,34 @@ public class genpuz {
     static int getInvCount()
     {
         //algorithm to get the count of inverses for the is solvable method, using the locs one dimensional array as an intializer
-        int arr[][] = new int [3][3];
-        for (int i =0; i<3; i++) {
-            for (int j = 0,k=0; j<3; j++,k++) {
-                arr[i][j] = locs[k];
-            }
-            
-        }
+        //using the locs one d array, an inverse is defined as a all the pieces after a piece that are less than it
+        //so for the array [734502186]
+        //7 has 6 pieces less than after it, 3 has 2, 4 has 2, 5 has 2, 2 has 1, 1 has none, 8 has 1, and 6 has none
+        //the total is 14, and because the count is even, it means the puzzle is solvable
+        //the loop goes over each piece, ignoring zero in all cases
         int inv_count = 0;
-        for (int i = 0; i < 3 - 1; i++)
-            for (int j = i + 1; j < 3; j++)
-             
-                // Value 0 is used for empty space
-                if (arr[j][i] > 0 &&
-                                arr[j][i] > arr[i][j])
-                    inv_count++;
-        //returns the count
+        for (int i =0; i< 9; i++) {
+            if (locs[i]!=0) {
+                
+                for (int j = i+1; j <9; j++) {
+                    if (locs[j] < locs[i] && locs[j]!=0) {
+                        
+                        inv_count++;
+                    }
+                }
+            }
+        }
+        
         return inv_count;
     }
      
     // This function returns true
     // if given 8 puzzle is solvable.
-    // The algorithm i found greatly increased the solvable puzzle rate, but it is not 100 percent effective
     boolean isSolvable()
     {
         // Count inversions in given 8 puzzle
         int invCount = getInvCount();
-     
+        
         // return true if inversion count is even.
         return (invCount % 2 == 0);
     }
